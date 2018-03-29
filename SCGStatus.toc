@@ -1,0 +1,16 @@
+## Interface: 70300
+## Title: SCG Status
+## Version: 1.0.9
+## Notes: Stormwind City Guard Status
+## Author: Tammya-MoonGuard
+## SavedVariables: SCGStatusSaved
+   
+embeds.xml
+SCGStatus.lua
+minimapbutton.lua
+status.lua
+menu.lua
+roster.lua
+widgets/rosterentry.lua
+
+ui/UI.xml

@@ -1,0 +1,39 @@
+## 1.0.9
+Ranks update.
+Added some tooltips.
+
+## 1.0.8
+Icon for cadets. I'm such a GREAT artist.
+Special PFC support.
+Clicking the frame toggles On Duty.
+Only top two ranks of guild have "admin" power.
+
+## 1.0.7
+Nothing!
+
+## 1.0.6
+Friendlier tooltip name (Guard Status).
+Improved auto-refreshing for guard roster.
+
+## 1.0.5
+Super special handling of the Officer rank.
+
+## 1.0.4
+Added icons to guard roster.
+Using officer notes instead of character names in guard roster.
+
+## 1.0.3
+More INTUITIVE interface for custom status setting.
+Default to NOT hide the panel when off-duty.
+
+## 1.0.2
+Updated Ace3 for 7.3 compatibility.
+Option for hiding/keeping the panel when off duty.
+Added reminder for adding + when setting custom on duty status.
+Some fixes for custom statuses.
+
+## 1.0.1
+Hide everything when you're not in the guild.
+
+## 1.0.0
+Initial release.

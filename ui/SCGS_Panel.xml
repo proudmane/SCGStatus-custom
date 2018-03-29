@@ -1,0 +1,101 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/ ..\..\FrameXML\UI.xsd">
+  <Button name="SCGS_Panel" movable="true" enableMouse="true" frameStrata="MEDIUM" parent="UIParent">
+    <Size x="170" y="35" />
+    <Anchors>
+      <Anchor point="TOP" x="0" y="-64"/>
+    </Anchors>
+    <Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+
+			<EdgeSize>
+				<AbsValue val="8"/>
+			</EdgeSize>
+			<TileSize>
+				<AbsValue val="8"/>
+			</TileSize>
+			<BackgroundInsets>
+				<AbsInset left="5" right="5" top="5" bottom="5"/>
+			</BackgroundInsets>
+      <Color r="1" g="0" b="0"/>
+    </Backdrop>
+    <Layers>
+    <!--
+      <Layer level="BACKGROUND" parentKey="bg">
+        <Texture>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="-2" y="2" />
+            <Anchor point="BOTTOMRIGHT" x="2" y="-2" />
+          </Anchors>
+          <Color r="0.8" g="0.8" b="0.8" a="1" />
+        </Texture>
+        
+      </Layer>
+      <Layer level="ARTWORK">
+      </Layer>-->
+      <Layer level="BACKGROUND">
+        <Texture parentKey="icon" file="Interface/Icons/Inv_Misc_Tournaments_banner_Human">
+          <Size x="34" y="34"/>
+          <Anchors>
+            <Anchor point="LEFT" x="0" y="0"/>
+          </Anchors>
+          <TexCoords left="0.07" right="0.93" top="0.07" bottom="0.93"/>
+        </Texture>
+        <Texture setAllPoints="true" parentKey="bg">
+          <Color r="0.05" g="0.2" b="0.6" a="0.6"/>
+        </Texture>
+      </Layer>
+      <Layer level="ARTWORK">
+        <FontString font="Fonts\FRIZQT__.TTF" height="20" parentKey="text" text="Test!">
+          <FontHeight val="13"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="30" y="0"/>
+            <Anchor point="BOTTOMRIGHT" x="0" y="0"/>
+          </Anchors>
+          <Shadow>
+            <Offset x="1" y="1" />
+            <Color r="0" g="0" b="0" a="0.5"/>
+          </Shadow>
+        </FontString>
+        
+      </Layer>
+      <Layer level="OVERLAY">
+        <Texture setAllPoints="true" parentKey="clickhighlight" hidden="true" alphaMode="ADD"> 
+          <Color r="0.2" g="0.2" b="0.2" a="1"/>
+          
+        </Texture>
+      </Layer>
+    </Layers>
+    <Scripts>
+      <OnLoad>
+        self.bg:SetDrawLayer( "BACKGROUND", -1 )
+        self:SetClampedToScreen( true )
+        self:RegisterForDrag( "LeftButton" )
+        self:RegisterForClicks( "LeftButtonUp", "RightButtonUp" )
+      </OnLoad>
+      <OnDragStart>
+        self:StartMoving()
+        self.clickhighlight:Hide()
+      </OnDragStart>
+      <OnDragStop>
+        self:StopMovingOrSizing()
+      </OnDragStop>
+      <OnMouseDown>
+       
+        if button == "LeftButton" then
+          self.clickhighlight:Show()
+        elseif button == "RightButton" then
+          
+        end
+      </OnMouseDown>
+      <OnMouseUp>
+        self.clickhighlight:Hide()
+      </OnMouseUp>
+      <OnClick>
+        if button == "LeftButton" then
+          SCGStatus.Status.ToggleDuty()
+        elseif button == "RightButton" then
+          SCGStatus.ShowMenu()
+        end
+      </OnClick>
+    </Scripts>
+  </Button>
+</Ui>
