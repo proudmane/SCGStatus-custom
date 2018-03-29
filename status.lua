@@ -235,7 +235,6 @@ end
 -- @param name Name of player.
 --
 function Me.ToggleDuty( name )
-	print("toggle duty called")
 	local char_name = Me.GetCharName()
 	if Me.OnDuty( name ) then
 		Me.Set( "- Off Duty", name )
