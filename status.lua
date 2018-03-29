@@ -108,14 +108,14 @@ function Me.Update()
 	for i = 1, GetNumGuildMembers() do
 		local fullName,rank,rankIndex,_,_,_,note,note2,online = GetGuildRosterInfo( i )
 		note2 = note2 or ""
-		
+
 		local name = Ambiguate( fullName, "all" )
 		if online and rank ~= "Applicant" then
-		
+
 			local foundRank = false
 			local rank_space  = (rank .. " "):lower()
 			local note2_space = (note2 .. " "):lower()
-			
+
 			for myRank = #guildRanks, 1, -1 do
 				for _, pattern in ipairs(guildRanks[myRank].patterns) do
 					if note2_space:match( pattern ) or rank_space:match( pattern ) then
@@ -125,7 +125,7 @@ function Me.Update()
 					end
 				end
 			end
-			
+
 			if not foundRank then
 				-- some hacks here~
 				if note2_space:match( "duchess amanda" ) then
@@ -133,7 +133,7 @@ function Me.Update()
 					foundRank = true
 				end
 			end
-			
+
 			if foundRank then
 				players[name] = {
 					rank       = rank;
@@ -174,7 +174,7 @@ function Me.Get( name )
 	name = name or UnitName( "player" )
 	local data = players[name]
 	if not data then return end
-	
+
 	local status, onduty = Me.Parse( data.status )
 	local clean
 	if onduty then
@@ -182,7 +182,7 @@ function Me.Get( name )
 	else
 		clean = "- " .. status
 	end
-	
+
 	return status, onduty, clean, data.rank, data.rank_index, data.name
 end
 
@@ -204,7 +204,7 @@ function Me.IsCustom( status )
 			return false
 		end
 	end
-	
+
 	return true
 end
 
@@ -215,17 +215,17 @@ end
 -- @param name Name of player or nil for self.
 --
 function Me.Set( status, name )
-	
+
 	name = name or UnitName( "player" )
 	name = Ambiguate( name, "all" )
-	
-	if not Main.InGuild() then 
+
+	if not Main.InGuild() then
 		return
 	end
 	if name ~= UnitName("player") and not Me.IsOfficer() then return end
-	
+
 	if not playerGuildMap[name] then return end -- player is not in guild...
-	
+
 	GuildRosterSetPublicNote( playerGuildMap[name], status )
 end
 
@@ -235,11 +235,28 @@ end
 -- @param name Name of player.
 --
 function Me.ToggleDuty( name )
+	print("toggle duty called")
+	local char_name = Me.GetCharName()
 	if Me.OnDuty( name ) then
 		Me.Set( "- Off Duty", name )
+		local comm_string = "\""..char_name.." going off duty.\""
+		SendChatMessage( comm_string, "OFFICER" ,"COMMON" )
 	else
 		Me.Set( "+ On Duty", name )
+		local comm_string = "\""..char_name.." reporting for duty.\""
+		SendChatMessage( comm_string, "OFFICER" ,"COMMON" )
 	end
+end
+
+function Me.GetCharName()
+	local player_name = UnitName("player")
+	for i=1, GetNumGuildMembers() do
+		local fullName,_,_,_,_,_,_,note2,_ = GetGuildRosterInfo( i )
+		if fullName == (player_name.."-MoonGuard") then
+			return note2
+		end
+	end
+	return ""
 end
 
 -------------------------------------------------------------------------------
