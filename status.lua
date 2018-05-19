@@ -239,11 +239,11 @@ function Me.ToggleDuty( name )
 	if Me.OnDuty( name ) then
 		Me.Set( "- Off Duty", name )
 		local comm_string = "\""..char_name.." going off duty.\""
-		SendChatMessage( comm_string, "OFFICER" ,"COMMON" )
+		SendChatMessage( comm_string, "OFFICER", 7, nil)
 	else
 		Me.Set( "+ On Duty", name )
 		local comm_string = "\""..char_name.." reporting for duty.\""
-		SendChatMessage( comm_string, "OFFICER" ,"COMMON" )
+		SendChatMessage( comm_string, "OFFICER", 7, nil)
 	end
 end
 
